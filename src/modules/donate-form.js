@@ -51,7 +51,7 @@ export class DonateForm {
     }
 
     render(){
-        console.log(this.createNewDonate(), 'in render')
+
 
 
         this.#formElement.addEventListener('submit', function (event){
@@ -63,10 +63,10 @@ export class DonateForm {
                 amount: getInputValue,
                 date: today
             }
-
             event.preventDefault()
 
-            console.log(this.createNewDonate(), 'inside submit')
+            console.log(this.createNewDonate(obj), 'inside submit')
+            this.createNewDonate(obj)
 
 
             // this.#formElement.innerHTML = ''

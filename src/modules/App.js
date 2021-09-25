@@ -21,7 +21,7 @@ export class App {
         }
         this.donateForm = new DonateForm(
             this.state['totalAmount'],
-            this.createNewDonate
+            this.createNewDonate.bind(this)
         )
         this.donateList = new DonateList(
             this.state['donates']
@@ -29,18 +29,18 @@ export class App {
 
     }
 
-    createNewDonate(newDonate = {} ){
-        console.log('wwwwooooo')
-        // console.log(this.state.donates, 'state donates')
-        // return this.state['donates'].push(newDonate)
-        // const a = this.state['donates']
-        // const b = this.state['totalAmount']
-        // this.donateForm.updateTotalAmount(a)
-        // this.donateList.updateDonates(b)
+    createNewDonate(newDonate = {}){
+        console.log(this.state['donates'], 'state')
+        this.state['donates'].push(newDonate)
+        const a = this.state['donates']
+        const b = this.state['totalAmount']
+        this.donateForm.updateTotalAmount(a)
+        this.donateList.updateDonates(b)
 
     }
 
     run(){
+
 
         const renderForm = this.donateForm.render()
         const listRender = this.donateList.render()
