@@ -11,19 +11,25 @@ export class DonateList {
         this.#arrayOfDonates = donates
         this.#donatesContainer = document.createElement('div')
         this.#donatesContainer.className = 'donates-container'
+        this.listContainer = document.createElement('div')
+        this.listContainer.className = 'donates-container__donates'
 
     }
 
 
-
-    updateDonates(updatedDonates = []){
-        const listContainer =document.createElement('div')
-        listContainer.className = 'donates-container__donates'
-        listContainer.innerHTML = ''
-        updatedDonates.forEach(({amount,date}) =>{
-            listContainer.append(this.#createItem(amount, date))
+    createDonates(container ){
+        container.innerHTML = ''
+        this.#arrayOfDonates.forEach((el) =>{
+            const donate = this.#createItem(el['amount'], el['date'])
+                container.append(donate)
              })
-        return listContainer
+
+    }
+
+
+    updateDonates(newArr){
+        this.#arrayOfDonates = newArr
+        this.createDonates(this.listContainer)
     }
 
 
@@ -41,13 +47,17 @@ export class DonateList {
 
 
         render(){
-            // this.#createList(this.#arrayOfItems)
+
                 const title = document.createElement('h2')
                 title.className = 'donates-container__title'
                 title.textContent = 'List of donates'
+                this.listContainer = document.createElement('div')
+                this.listContainer.className = 'donates-container__donates'
 
 
-            this.#donatesContainer.append(title, this.updateDonates(this.#arrayOfDonates))
+
+            this.#donatesContainer.append(title, this.listContainer)
+            this.updateDonates(this.#arrayOfDonates)
 
 
 

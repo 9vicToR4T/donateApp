@@ -52,36 +52,22 @@ export class DonateForm {
 
 
     render(){
-        console.log('e')
-
-
-        // here code work
-        this.createNewDonate({
-            amount: 24,
-            date: new Date()
-        })
-
-
-       this.#formElement.addEventListener('submit', (event) => {
-
+      this.#formElement.addEventListener('submit', (event) => {
             const getInput = document.querySelector('.donate-form__donate-input')
             const getInputValue = getInput.value
 
-
-           this.createNewDonate({
+          this.createNewDonate({
                amount: +getInputValue,
                date: new Date()
            })
 
-            // this.#formElement.innerHTML = ''
-           // event.preventDefault()
-
+          getInput.value = ''
+           event.preventDefault()
         })
 
 
 
         this.#createForm()
-        this.updateTotalAmount(this.totalAmount)
         return this.#formElement
     }
     
