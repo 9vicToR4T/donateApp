@@ -4,24 +4,26 @@ import {momentDate} from "../utils/functionsHelper";
 export class DonateList {
     #arrayOfDonates
     #donatesContainer
-    #listContainer
+
 
 
     constructor(donates) {
         this.#arrayOfDonates = donates
         this.#donatesContainer = document.createElement('div')
         this.#donatesContainer.className = 'donates-container'
-        this.#listContainer = document.createElement('div')
-        this.#listContainer.className = 'donates-container__donates'
+
     }
 
 
 
     updateDonates(updatedDonates = []){
-        this.#listContainer.innerHTML = ''
-       return updatedDonates.forEach(({amount,date}) =>{
-                this.#listContainer.append(this.#createItem(amount, date))
-            })
+        const listContainer =document.createElement('div')
+        listContainer.className = 'donates-container__donates'
+        listContainer.innerHTML = ''
+        updatedDonates.forEach(({amount,date}) =>{
+            listContainer.append(this.#createItem(amount, date))
+             })
+        return listContainer
     }
 
 
@@ -44,8 +46,8 @@ export class DonateList {
                 title.className = 'donates-container__title'
                 title.textContent = 'List of donates'
 
-            this.updateDonates(this.#arrayOfDonates)
-            this.#donatesContainer.append(title, this.#listContainer)
+
+            this.#donatesContainer.append(title, this.updateDonates(this.#arrayOfDonates))
 
 
 

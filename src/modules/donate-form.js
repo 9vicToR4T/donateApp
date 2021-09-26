@@ -1,5 +1,6 @@
 
 
+
 export class DonateForm {
     #formElement
     constructor(totalAmount , createNewDonate) {
@@ -8,7 +9,6 @@ export class DonateForm {
         this.totalAmount = totalAmount
         this.#formElement = document.createElement('form')
         this.#formElement.className = 'donate-form'
-
     }
 
     updateTotalAmount(newAmount){
@@ -17,9 +17,9 @@ export class DonateForm {
         amountTotal.textContent = `${newAmount} $`
 
         return amountTotal
-
-
     }
+
+
     #createForm(){
         const inputLabel = document.createElement('label')
         inputLabel.className = 'donate-form__input-label'
@@ -50,32 +50,38 @@ export class DonateForm {
 
     }
 
+
     render(){
+        console.log('e')
 
 
+        // here code work
+        this.createNewDonate({
+            amount: 24,
+            date: new Date()
+        })
 
-        this.#formElement.addEventListener('submit', function (event){
+
+       this.#formElement.addEventListener('submit', (event) => {
+
             const getInput = document.querySelector('.donate-form__donate-input')
             const getInputValue = getInput.value
-            const today = new Date()
 
-            const obj = {
-                amount: getInputValue,
-                date: today
-            }
-            event.preventDefault()
 
-            console.log(this.createNewDonate(obj), 'inside submit')
-            this.createNewDonate(obj)
-
+           this.createNewDonate({
+               amount: +getInputValue,
+               date: new Date()
+           })
 
             // this.#formElement.innerHTML = ''
-
+           // event.preventDefault()
 
         })
 
+
+
         this.#createForm()
-        this.updateTotalAmount(this.createNewDonate)
+        this.updateTotalAmount(this.totalAmount)
         return this.#formElement
     }
     

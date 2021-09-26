@@ -29,17 +29,18 @@ export class App {
 
     }
 
-    createNewDonate(newDonate = {}){
-        console.log(this.state['donates'], 'state')
+    createNewDonate(newDonate){
+
         this.state['donates'].push(newDonate)
-        const a = this.state['donates']
-        const b = this.state['totalAmount']
-        this.donateForm.updateTotalAmount(a)
-        this.donateList.updateDonates(b)
+        const a = this['state']['donates']
+        const b = this['state']['totalAmount']
+        this.donateForm.updateTotalAmount(b)
+        this.donateList.updateDonates(a)
 
     }
 
     run(){
+
 
 
         const renderForm = this.donateForm.render()
