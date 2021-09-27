@@ -1,4 +1,4 @@
-
+import * as settings from "../core/constants/settings";
 
 
 export class DonateForm {
@@ -11,19 +11,27 @@ export class DonateForm {
         this.#formElement.className = 'donate-form'
     }
 
-    updateTotalAmount(newAmount){
+    createTotalAmount(val ){
         const amountTotal = document.createElement('h1')
         amountTotal.setAttribute('id', 'total-amount')
-        amountTotal.textContent = `${newAmount} $`
-
+        amountTotal.textContent = `${val} ${settings.settings.currency}`
         return amountTotal
+    }
+
+    updateTotalAmount(newAmount){
+        this.totalAmount = +newAmount
+        this.createTotalAmount(this.totalAmount)
+        this.#formElement.innerHTML = ''
+        this.#createForm()
+
+
     }
 
 
     #createForm(){
         const inputLabel = document.createElement('label')
         inputLabel.className = 'donate-form__input-label'
-        inputLabel.textContent = 'Введите сумму в $'
+        inputLabel.textContent = `Your donate in ${settings.settings.currency}`
 
         const donateInput = document.createElement('input')
         donateInput.className = 'donate-form__donate-input'
@@ -38,12 +46,9 @@ export class DonateForm {
         const formBtn = document.createElement('button')
         formBtn.className = 'donate-form__submit-button'
         formBtn.setAttribute('type', 'submit')
-        formBtn.textContent = 'Задонатить'
-
-        const totalAmountHTML = this.updateTotalAmount(this.totalAmount)
-
+        formBtn.textContent = 'Donate'
         this.#formElement.append(
-            totalAmountHTML,
+            this.createTotalAmount(this.totalAmount),
             inputLabel,
             formBtn
         )
@@ -55,12 +60,10 @@ export class DonateForm {
       this.#formElement.addEventListener('submit', (event) => {
             const getInput = document.querySelector('.donate-form__donate-input')
             const getInputValue = getInput.value
-
           this.createNewDonate({
                amount: +getInputValue,
                date: new Date()
            })
-
           getInput.value = ''
            event.preventDefault()
         })

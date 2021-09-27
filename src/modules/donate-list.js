@@ -1,10 +1,12 @@
-import {momentDate} from "../utils/functionsHelper";
+import {momentDate} from "../core/functionsHelper";
 
 
 export class DonateList {
     #arrayOfDonates
     #donatesContainer
-
+    static TitleList = {
+        'ListTitle' : 'List of donates'
+    }
 
 
     constructor(donates) {
@@ -19,8 +21,8 @@ export class DonateList {
 
     createDonates(container ){
         container.innerHTML = ''
-        this.#arrayOfDonates.forEach((el) =>{
-            const donate = this.#createItem(el['amount'], el['date'])
+        this.#arrayOfDonates.forEach(({amount, date}) =>{
+            const donate = this.#createItem(amount, date)
                 container.append(donate)
              })
 
@@ -50,7 +52,7 @@ export class DonateList {
 
                 const title = document.createElement('h2')
                 title.className = 'donates-container__title'
-                title.textContent = 'List of donates'
+                title.textContent = DonateList.TitleList.ListTitle
                 this.listContainer = document.createElement('div')
                 this.listContainer.className = 'donates-container__donates'
 
